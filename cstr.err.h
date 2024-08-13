@@ -14,4 +14,13 @@ typedef enum CStrStatusCode {
     CStrNullStrError,
 }CStrStatusCode;
 
+typedef enum CWStrStatusCode {
+    CWStrSuccess = 0,
+    CWStrFuncArgError,
+    CWStrMemError,
+    CWStrZeroSizeError,
+    CWStrOutOfBoundError,
+    CWStrNullStrError,
+}CWStrStatusCode;
+
 #endif //CSTR_ERR_H
