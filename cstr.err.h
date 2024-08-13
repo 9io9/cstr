@@ -12,6 +12,7 @@ typedef enum CStrStatusCode {
     CStrZeroSizeError,
     CStrOutOfBoundError,
     CStrNullStrError,
+    CStrNoSplitError,
 }CStrStatusCode;
 
 typedef enum CWStrStatusCode {

@@ -19,9 +19,13 @@ extern CStrStatusCode cstr_popc(char* c, CString* cstr);
 
 extern CStrStatusCode cstr_pops(size_t str_len, char str[], CString* cstr);
 
+extern CStrStatusCode cstr_split(CString* cstr, char sep, size_t* strs_len, CStringRef** strs);
+
 extern CStrStatusCode cstr_strcpy(size_t cstr_start, size_t str_len, char str[], CStrCopyFunc cstr_cpy_func, CString* cstr);
 
 extern CStrStatusCode cstr_fprint(FILE* f, CString* cstr);
+
+extern CStrStatusCode cstr_ref_fprint(FILE* f, CStringRef* cstr_ref, size_t cstr_ref_len);
 
 extern CStrStatusCode cstr_clean(CString* cstr);
 
@@ -63,11 +67,17 @@ extern CStrStatusCode cstr_popc_nocheck(char* c, CString* cstr);
 FUNC_ASSERT(CSTR != NULL, STR_LEN != 0, STR != NULL)
 extern CStrStatusCode cstr_pops_nocheck(size_t str_len, char str[], CString* cstr);
 
+FUNC_ASSERT(CSTR != NULL, STRS_LEN != NULL, STRS != NULL)
+extern CStrStatusCode cstr_split_nocheck(CString* cstr, char sep, size_t* strs_len, CStringRef** strs);
+
 FUNC_ASSERT(CSTR != NULL, STR_LEN != 0, STR != NULL)
 extern CStrStatusCode cstr_strcpy_nocheck(size_t cstr_start, size_t str_len, char str[], CStrCopyFunc cstr_cpy_func, CString* cstr);
 
 FUNC_ASSERT(F != NULL, CSTR != NULL)
 extern CStrStatusCode cstr_fprint_nocheck(FILE* f, CString* cstr);
+
+FUNC_ASSERT(F != NULL, CSTR_REF != NULL)
+extern CStrStatusCode cstr_ref_fprint(FILE* f, CStringRef* cstr_ref, size_t cstr_ref_len);
 
 FUNC_ASSERT(CSTR != NULL)
 extern CStrStatusCode cstr_clean_nocheck(CString* cstr);

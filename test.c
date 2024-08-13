@@ -10,11 +10,11 @@ int main(int argc, char* argv[]) {
 
     CString* cstr;
 
-    if (cstr_new(sizeof("hello") - 1, "hello", &cstr) != CStrSuccess) {
+    if (cstr_new(sizeof("he llo") - 1, "hello", &cstr) != CStrSuccess) {
         return -1;
     }
 
-    if (cstr_pushs(sizeof("catmore") - 1, "catmore", cstr) != CStrSuccess) {
+    if (cstr_pushs(sizeof("cat more") - 1, "catmore", cstr) != CStrSuccess) {
         return -1;
     }
 
@@ -35,6 +35,13 @@ int main(int argc, char* argv[]) {
     fprintf(stdout, "%s\n", str_buf);
 
     if (cstr_fprint(stdout, cstr) != CStrSuccess) {
+        return -1;
+    }
+
+    size_t split_len;
+    CStringRef* split_strs;
+
+    if (cstr_split(cstr, ' ', &split_len, &split_strs) != CStrSuccess) {
         return -1;
     }
 

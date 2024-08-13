@@ -18,10 +18,20 @@ typedef struct CString {
     char* _cstr;
 }CString;
 
+typedef struct CStringRef {
+    size_t _cstr_ref_len;
+    char* _cstr_ref;
+}CStringRef;
+
 typedef struct CWString {
     size_t _cwstr_len;
     size_t _cwstr_sz;
     wchar_t* _cwstr;
 }CWString;
+
+typedef struct CWStringRef {
+    size_t _cwstr_ref_len;
+    wchar_t* _cwstr_ref;
+}CWStringRef;
 
 #endif //CSTR_DEF_H
