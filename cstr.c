@@ -320,6 +320,22 @@ CStrStatusCode cstr_fprint_nocheck(FILE* f, CString* cstr) {
     return CStrSuccess;
 }
 
+CStrStatusCode cstr_clean(CString* cstr) {
+    if (cstr == NULL) {
+        return CStrFuncArgError;
+    }
+
+    cstr->_cstr_sz = 0;
+
+    return CStrSuccess;
+}
+
+CStrStatusCode cstr_clean_nocheck(CString* cstr) {
+    cstr->_cstr_sz = 0;
+
+    return CStrSuccess;
+}
+
 CStrStatusCode cstr_free(CString** cstr) {
     if (cstr == NULL) {
         return CStrFuncArgError;

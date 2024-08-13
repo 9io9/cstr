@@ -23,6 +23,8 @@ extern CStrStatusCode cstr_strcpy(size_t cstr_start, size_t str_len, char str[],
 
 extern CStrStatusCode cstr_fprint(FILE* f, CString* cstr);
 
+extern CStrStatusCode cstr_clean(CString* cstr);
+
 extern CStrStatusCode cstr_free(CString** cstr);
 
 extern CWStrStatusCode cwstr_new(size_t wstr_len, wchar_t wstr[], CWString** cwstr);
@@ -66,6 +68,9 @@ extern CStrStatusCode cstr_strcpy_nocheck(size_t cstr_start, size_t str_len, cha
 
 FUNC_ASSERT(F != NULL, CSTR != NULL)
 extern CStrStatusCode cstr_fprint_nocheck(FILE* f, CString* cstr);
+
+FUNC_ASSERT(CSTR != NULL)
+extern CStrStatusCode cstr_clean_nocheck(CString* cstr);
 
 FUNC_ASSERT(CSTR != NULL, *CSTR != NULL)
 extern CStrStatusCode cstr_free_nocheck(CString** cstr);
