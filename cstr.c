@@ -253,6 +253,10 @@ CStrStatusCode cstr_split(CString* cstr, char sep, size_t* strs_len, CStringRef*
         return CStrFuncArgError;
     }
 
+    if (cstr->_cstr_sz == 0) {
+        return CStrZeroSizeError;
+    }
+
     *strs_len = 0;
     *strs = NULL;
 
@@ -289,22 +293,28 @@ CStrStatusCode cstr_split(CString* cstr, char sep, size_t* strs_len, CStringRef*
     for (size_t cstr_id = 0, strs_id = 0; cstr_id < cstr->_cstr_sz; ++cstr_id) {
         if (cstr->_cstr[cstr_id] == sep) {
             if (cstr_id != old_cstr_id) {
-                strs[strs_id]->_cstr_ref_len = cstr_id - old_cstr_id;
-                strs[strs_id]->_cstr_ref = &cstr->_cstr[old_cstr_id];
+                strs[0][strs_id]._cstr_ref_len = cstr_id - old_cstr_id;
+                strs[0][strs_id]._cstr_ref = &cstr->_cstr[old_cstr_id];
                 strs_id += 1;
             }
+
+            old_cstr_id = cstr_id + 1;
         }
     }
 
     if (cstr->_cstr_sz - 1 != old_cstr_id) {
-        strs[*strs_len - 1]->_cstr_ref_len = cstr->_cstr_sz - old_cstr_id;
-        strs[*strs_len - 1]->_cstr_ref = &cstr->_cstr[old_cstr_id];
+        strs[0][*strs_len - 1]._cstr_ref_len = cstr->_cstr_sz - old_cstr_id;
+        strs[0][*strs_len - 1]._cstr_ref = &cstr->_cstr[old_cstr_id];
     }
 
     return CStrSuccess;
 }
 
 CStrStatusCode cstr_split_nocheck(CString* cstr, char sep, size_t* strs_len, CStringRef** strs) {
+    if (cstr->_cstr_sz == 0) {
+        return CStrZeroSizeError;
+    }
+
     *strs_len = 0;
     *strs = NULL;
 
@@ -341,16 +351,18 @@ CStrStatusCode cstr_split_nocheck(CString* cstr, char sep, size_t* strs_len, CSt
     for (size_t cstr_id = 0, strs_id = 0; cstr_id < cstr->_cstr_sz; ++cstr_id) {
         if (cstr->_cstr[cstr_id] == sep) {
             if (cstr_id != old_cstr_id) {
-                strs[strs_id]->_cstr_ref_len = cstr_id - old_cstr_id;
-                strs[strs_id]->_cstr_ref = &cstr->_cstr[old_cstr_id];
+                strs[0][strs_id]._cstr_ref_len = cstr_id - old_cstr_id;
+                strs[0][strs_id]._cstr_ref = &cstr->_cstr[old_cstr_id];
                 strs_id += 1;
             }
+
+            old_cstr_id = strs_id + 1;
         }
     }
 
     if (cstr->_cstr_sz - 1 != old_cstr_id) {
-        strs[*strs_len - 1]->_cstr_ref_len = cstr->_cstr_sz - old_cstr_id;
-        strs[*strs_len - 1]->_cstr_ref = &cstr->_cstr[old_cstr_id];
+        strs[0][*strs_len - 1]._cstr_ref_len = cstr->_cstr_sz - old_cstr_id;
+        strs[0][*strs_len - 1]._cstr_ref = &cstr->_cstr[old_cstr_id];
     }
 
     return CStrSuccess;
@@ -405,6 +417,7 @@ CStrStatusCode cstr_ref_fprint(FILE* f, CStringRef* cstr_ref, size_t cstr_ref_le
 
     for (size_t ref_id = 0; ref_id < cstr_ref_len; ++ref_id) {
         fwrite(cstr_ref[ref_id]._cstr_ref, sizeof(char), cstr_ref[ref_id]._cstr_ref_len, f);
+        fwrite("\n", sizeof(char), 1, f);
     }
 
     return CStrSuccess;
@@ -419,6 +432,7 @@ CStrStatusCode cstr_fprint_nocheck(FILE* f, CString* cstr) {
 CStrStatusCode cstr_ref_fprint_nocheck(FILE* f, CStringRef* cstr_ref, size_t cstr_ref_len) {
     for (size_t ref_id = 0; ref_id < cstr_ref_len; ++ref_id) {
         fwrite(cstr_ref[ref_id]._cstr_ref, sizeof(char), cstr_ref[ref_id]._cstr_ref_len, f);
+        fwrite("\n", sizeof(char), 1, f);
     }
 
     return CStrSuccess;

@@ -77,7 +77,7 @@ FUNC_ASSERT(F != NULL, CSTR != NULL)
 extern CStrStatusCode cstr_fprint_nocheck(FILE* f, CString* cstr);
 
 FUNC_ASSERT(F != NULL, CSTR_REF != NULL)
-extern CStrStatusCode cstr_ref_fprint(FILE* f, CStringRef* cstr_ref, size_t cstr_ref_len);
+extern CStrStatusCode cstr_ref_fprint_nocheck(FILE* f, CStringRef* cstr_ref, size_t cstr_ref_len);
 
 FUNC_ASSERT(CSTR != NULL)
 extern CStrStatusCode cstr_clean_nocheck(CString* cstr);
