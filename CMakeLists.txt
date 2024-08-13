@@ -8,3 +8,7 @@ set(BUILD_SHARED_LIBS off)
 add_library(cstr cstr.c
         cstr.def.h cstr.h
         cstr.err.h)
+
+add_executable(cstr_test test.c)
+
+target_link_libraries(cstr_test cstr)

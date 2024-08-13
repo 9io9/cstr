@@ -1,6 +1,7 @@
 #ifndef CSTR_LIBRARY_H
 #define CSTR_LIBRARY_H
 
+#include <stdio.h>
 #include "cstr.def.h"
 #include "cstr.err.h"
 
