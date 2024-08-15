@@ -7,7 +7,11 @@ set(BUILD_SHARED_LIBS off)
 
 add_library(cstr cstr.c
         cstr.def.h cstr.h
-        cstr.err.h)
+        cstr.err.h
+        cstr.cast.h
+        cast.c
+        cstr.strop.h
+        strop.c)
 
 add_executable(cstr_test test.c)
 

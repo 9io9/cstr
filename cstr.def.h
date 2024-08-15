@@ -8,6 +8,7 @@
 #include <stddef.h>
 
 #define CSTR_DEFAULT_CPYFUNC NULL
+#define FUNC_ASSERT(...)
 
 typedef size_t(*CStrCopyFunc)(char*, char*, size_t);
 typedef size_t(*CWStrCopyFunc)(wchar_t*, wchar_t*, size_t);

@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include "cstr.def.h"
 #include "cstr.err.h"
-
-#define FUNC_ASSERT(...)
+#include "cstr.strop.h"
+#include "cstr.cast.h"
 
 extern CStrStatusCode cstr_new(size_t str_len, char str[], CString** cstr);
 
@@ -18,8 +18,6 @@ extern CStrStatusCode cstr_pushs(size_t str_len, char str[], CString* cstr);
 extern CStrStatusCode cstr_popc(char* c, CString* cstr);
 
 extern CStrStatusCode cstr_pops(size_t str_len, char str[], CString* cstr);
-
-extern CStrStatusCode cstr_split(CString* cstr, char sep, size_t* strs_len, CStringRef** strs);
 
 extern CStrStatusCode cstr_strcpy(size_t cstr_start, size_t str_len, char str[], CStrCopyFunc cstr_cpy_func, CString* cstr);
 
@@ -67,8 +65,7 @@ extern CStrStatusCode cstr_popc_nocheck(char* c, CString* cstr);
 FUNC_ASSERT(CSTR != NULL, STR_LEN != 0, STR != NULL)
 extern CStrStatusCode cstr_pops_nocheck(size_t str_len, char str[], CString* cstr);
 
-FUNC_ASSERT(CSTR != NULL, STRS_LEN != NULL, STRS != NULL)
-extern CStrStatusCode cstr_split_nocheck(CString* cstr, char sep, size_t* strs_len, CStringRef** strs);
+
 
 FUNC_ASSERT(CSTR != NULL, STR_LEN != 0, STR != NULL)
 extern CStrStatusCode cstr_strcpy_nocheck(size_t cstr_start, size_t str_len, char str[], CStrCopyFunc cstr_cpy_func, CString* cstr);

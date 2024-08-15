@@ -15,6 +15,18 @@ typedef enum CStrStatusCode {
     CStrNoSplitError,
 }CStrStatusCode;
 
+typedef enum CStrOpStatusCode {
+    CStrOpSuccess = 0,
+    CStrOpFuncArgError,
+    CStrOpPatterNotMatchError,
+    CStrOpCmpSizeError,
+}CStrOpStatusCode;
+
+typedef enum CStrCastStatusCode {
+    CStrCastSuccess = 0,
+    CStrCastInvalidScaleFormatError,
+}CStrCastStatusCode;
+
 typedef enum CWStrStatusCode {
     CWStrSuccess = 0,
     CWStrFuncArgError,
