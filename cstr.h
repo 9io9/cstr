@@ -65,8 +65,6 @@ extern CStrStatusCode cstr_popc_nocheck(char* c, CString* cstr);
 FUNC_ASSERT(CSTR != NULL, STR_LEN != 0, STR != NULL)
 extern CStrStatusCode cstr_pops_nocheck(size_t str_len, char str[], CString* cstr);
 
-
-
 FUNC_ASSERT(CSTR != NULL, STR_LEN != 0, STR != NULL)
 extern CStrStatusCode cstr_strcpy_nocheck(size_t cstr_start, size_t str_len, char str[], CStrCopyFunc cstr_cpy_func, CString* cstr);
 

@@ -25,6 +25,8 @@ typedef enum CStrOpStatusCode {
 typedef enum CStrCastStatusCode {
     CStrCastSuccess = 0,
     CStrCastInvalidScaleFormatError,
+    CStrCastOverflowError,
+    CStrCastZeroStrError,
 }CStrCastStatusCode;
 
 typedef enum CWStrStatusCode {

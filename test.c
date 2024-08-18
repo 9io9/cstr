@@ -2,6 +2,7 @@
 // Created by mario on 2024/8/13.
 //
 
+#include <stdio.h>
 #include <string.h>
 
 #include "cstr.h"
@@ -10,16 +11,13 @@ int main(int argc, char* argv[]) {
 
     CString* cstr;
 
-    cstr_new(sizeof("print hello with smiling faces") - 1, "print hello with smiling faces", &cstr);
+    cstr_new(sizeof("073") - 1, "073", &cstr);
 
-    CStringRef cstr_ref;
+    size_t cast_size = 0;
 
-    if (cstr_find_str(cstr, " wih s", sizeof(" wih s") - 1, &cstr_ref) == CStrOpPatterNotMatchError) {
-        fprintf(stdout, "no match pattern\n");
-        return -1;
-    }
+    cstr_cast_to_size(cstr, &cast_size, 8);
 
-    cstr_ref_fprint(stdout, &cstr_ref, 1);
+    fprintf(stdout, "cast value = %zu\n", cast_size);
 
     return 0;
 }

@@ -321,3 +321,76 @@ CStrOpStatusCode cstr_cmp_str(CString* cstr, const char* str, size_t str_len, in
 
     return CStrOpSuccess;
 }
+
+CStrOpStatusCode cstr_cmp_str_nocheck(CString* cstr, const char* str, size_t str_len, int* cmp_res) {
+    if (str_len > cstr->_cstr_sz) {
+        *cmp_res = 1;
+        return CStrOpCmpSizeError;
+    }
+
+    for (size_t cmp_id = 0; cmp_id < str_len; ++cmp_id) {
+        if (cstr->_cstr[cmp_id] > str[cmp_id]) {
+            *cmp_res = 1;
+            return CStrOpSuccess;
+        }
+
+        if (cstr->_cstr[cmp_id] < str[cmp_id]) {
+            *cmp_res = -1;
+            return CStrOpSuccess;
+        }
+    }
+
+    *cmp_res = 0;
+
+    return CStrOpSuccess;
+}
+
+CStrOpStatusCode cstr_ref_cmp_str(CStringRef* cstr_ref, const char* str, size_t str_len, int* cmp_res) {
+    if (cstr_ref == NULL || str == NULL || str_len == 0 || cmp_res == NULL) {
+        return CStrOpFuncArgError;
+    }
+
+    if (str_len > cstr_ref->_cstr_ref_len) {
+        *cmp_res = 1;
+        return CStrOpCmpSizeError;
+    }
+
+    for (size_t cmp_id = 0; cmp_id < str_len; ++cmp_id) {
+        if (cstr_ref->_cstr_ref[cmp_id] > str[cmp_id]) {
+            *cmp_res = 1;
+            return CStrOpSuccess;
+        }
+
+        if (cstr_ref->_cstr_ref[cmp_id] < str[cmp_id]) {
+            *cmp_res = -1;
+            return CStrOpSuccess;
+        }
+    }
+
+    *cmp_res = 0;
+
+    return CStrOpSuccess;
+}
+
+CStrOpStatusCode cstr_ref_cmp_str_nocheck(CStringRef* cstr_ref, const char* str, size_t str_len, int* cmp_res) {
+    if (str_len > cstr_ref->_cstr_ref_len) {
+        *cmp_res = 1;
+        return CStrOpCmpSizeError;
+    }
+
+    for (size_t cmp_id = 0; cmp_id < str_len; ++cmp_id) {
+        if (cstr_ref->_cstr_ref[cmp_id] > str[cmp_id]) {
+            *cmp_res = 1;
+            return CStrOpSuccess;
+        }
+
+        if (cstr_ref->_cstr_ref[cmp_id] < str[cmp_id]) {
+            *cmp_res = -1;
+            return CStrOpSuccess;
+        }
+    }
+
+    *cmp_res = 0;
+
+    return CStrOpSuccess;
+}

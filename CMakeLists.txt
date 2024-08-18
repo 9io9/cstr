@@ -16,3 +16,6 @@ add_library(cstr cstr.c
 add_executable(cstr_test test.c)
 
 target_link_libraries(cstr_test cstr)
+
+add_compile_definitions(__MACHINE_WORD_SIZE__=64)
+#add_compile_definitions(__MACHINE_WORD_SIZE__=32)

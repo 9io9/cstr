@@ -16,6 +16,8 @@ extern CStrOpStatusCode cstr_find_str_ref(CString* cstr, CStringRef* str, CStrin
 
 extern CStrOpStatusCode cstr_cmp_str(CString* cstr, const char* str, size_t str_len, int* cmp_res);
 
+extern CStrOpStatusCode cstr_ref_cmp_str(CStringRef* cstr_ref, const char* str, size_t str_len, int* cmp_res);
+
 // nocheck version
 
 FUNC_ASSERT(CSTR != NULL, STRS_LEN != NULL, STRS != NULL)
@@ -26,5 +28,11 @@ extern CStrOpStatusCode cstr_find_str_nocheck(CString* cstr, const char* str, si
 
 FUNC_ASSERT(CSTR != NULL, STR != NULL, FOUND_STR != NULL)
 extern CStrOpStatusCode cstr_find_str_ref_nocheck(CString* cstr, CStringRef* str, CStringRef* found_str);
+
+FUNC_ASSERT(CSTR != NULL, STR != NULL, STR_LEN != 0, CMP_RES != NULL)
+extern CStrOpStatusCode cstr_cmp_str_nocheck(CString* cstr, const char* str, size_t str_len, int* cmp_res);
+
+FUNC_ASSERT(CSTR_REF != NULL, STR != NULL, STR_LEN != 0, CMP_RES != NULL)
+extern CStrOpStatusCode cstr_ref_cmp_str_nocheck(CStringRef* cstr_ref, const char* str, size_t str_len, int* cmp_res);
 
 #endif //CSTR_STROP_H
