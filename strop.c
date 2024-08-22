@@ -203,7 +203,7 @@ CStrStatusCode cstr_split(CString* cstr, char sep, size_t* strs_len, CStringRef*
         return CStrNoSplitError;
     }
 
-    if (cstr->_cstr_sz - 1 != old_cstr_id) {
+    if (cstr->_cstr_sz != old_cstr_id) {
         *strs_len += 1;
     }
 
@@ -229,7 +229,7 @@ CStrStatusCode cstr_split(CString* cstr, char sep, size_t* strs_len, CStringRef*
         }
     }
 
-    if (cstr->_cstr_sz - 1 != old_cstr_id) {
+    if (cstr->_cstr_sz != old_cstr_id) {
         strs[0][*strs_len - 1]._cstr_ref_len = cstr->_cstr_sz - old_cstr_id;
         strs[0][*strs_len - 1]._cstr_ref = &cstr->_cstr[old_cstr_id];
     }
@@ -261,7 +261,7 @@ CStrStatusCode cstr_split_nocheck(CString* cstr, char sep, size_t* strs_len, CSt
         return CStrNoSplitError;
     }
 
-    if (cstr->_cstr_sz - 1 != old_cstr_id) {
+    if (cstr->_cstr_sz != old_cstr_id) {
         *strs_len += 1;
     }
 
@@ -283,11 +283,11 @@ CStrStatusCode cstr_split_nocheck(CString* cstr, char sep, size_t* strs_len, CSt
                 strs_id += 1;
             }
 
-            old_cstr_id = strs_id + 1;
+            old_cstr_id = cstr_id + 1;
         }
     }
 
-    if (cstr->_cstr_sz - 1 != old_cstr_id) {
+    if (cstr->_cstr_sz != old_cstr_id) {
         strs[0][*strs_len - 1]._cstr_ref_len = cstr->_cstr_sz - old_cstr_id;
         strs[0][*strs_len - 1]._cstr_ref = &cstr->_cstr[old_cstr_id];
     }
