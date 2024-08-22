@@ -16,9 +16,9 @@ static CStrStatusCode cstr_expand(CString* cstr) {
         return CStrMemError;
     }
 
-    cstr->_cstr_len = cstr->_cstr_len + DEFAULT_CSTR_LEN;
+    cstr->_cstr_len += DEFAULT_CSTR_LEN;
 #else
-    cstr->_cstr_len = cstr->_cstr_len + DEFAULT_CSTR_LEN;
+    cstr->_cstr_len += DEFAULT_CSTR_LEN;
 
     char* str_buf = malloc(cstr->_cstr_len);
 #endif
@@ -39,6 +39,12 @@ CStrStatusCode cstr_new(size_t str_len, char str[], CString** cstr) {
 
     CString* new_cstr = malloc(sizeof(*new_cstr));
 
+#ifdef __MEM_SENSITIVE__
+    if (new_cstr == NULL) {
+        return CStrMemError;
+    }
+#endif
+
     new_cstr->_cstr_len = str_len + DEFAULT_CSTR_LEN;
     new_cstr->_cstr = malloc(new_cstr->_cstr_len);
 
@@ -53,6 +59,12 @@ CStrStatusCode cstr_new(size_t str_len, char str[], CString** cstr) {
 
 CStrStatusCode cstr_new_nocheck(size_t str_len, char str[], CString** cstr) {
     CString* new_cstr = malloc(sizeof(*new_cstr));
+
+#ifdef __MEM_SENSITIVE__
+    if (new_cstr == NULL) {
+        return CStrMemError;
+    }
+#endif
 
     new_cstr->_cstr_len = str_len + DEFAULT_CSTR_LEN;
     new_cstr->_cstr = malloc(new_cstr->_cstr_len);
