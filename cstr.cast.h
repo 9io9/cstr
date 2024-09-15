@@ -11,7 +11,7 @@
 
 extern CStrCastStatusCode cstr_cast_to_ssize(CString* cstr, ssize_t* ssize, int scale);
 
-extern CStrCastStatusCode cstr_ref_cast_to_ssize(CStringRef* cstr_ref, ssize_t* size, int scale);
+extern CStrCastStatusCode cstr_ref_cast_to_ssize(CStringRef* cstr_ref, ssize_t* ssize, int scale);
 
 extern CStrCastStatusCode cstr_cast_to_size(CString* cstr, size_t* size, int scale);
 
@@ -29,7 +29,7 @@ FUNC_ASSERT(CSTR != NULL, SSIZE != NULL)
 extern CStrCastStatusCode cstr_cast_to_ssize_nocheck(CString* cstr, ssize_t* ssize, int scale);
 
 FUNC_ASSERT(CSTR_REF != NULL, SSIZE != NULL)
-extern CStrCastStatusCode cstr_ref_cast_to_ssize_nocheck(CStringRef* cstr_ref, ssize_t* size, int scale);
+extern CStrCastStatusCode cstr_ref_cast_to_ssize_nocheck(CStringRef* cstr_ref, ssize_t* ssize, int scale);
 
 FUNC_ASSERT(CSTR != NULL, SIZE != NULL)
 extern CStrCastStatusCode cstr_cast_to_size_nocheck(CString* cstr, size_t* size, int scale);
