@@ -3,6 +3,7 @@
 //
 
 #include <malloc.h>
+#include <stdbool.h>
 #include <string.h>
 
 #include "cstr.def.h"
@@ -175,7 +176,7 @@ CStrOpStatusCode cstr_find_str_ref_nocheck(CString* cstr, CStringRef* str, CStri
     return CStrOpSuccess;
 }
 
-CStrStatusCode cstr_split(CString* cstr, char sep, size_t* strs_len, CStringRef** strs) {
+CStrStatusCode cstr_split(CString* cstr, char sep, char split_enable_ch, char split_disable_ch, size_t* strs_len, CStringRef** strs) {
     if (cstr == NULL || strs_len == NULL || strs == NULL) {
         return CStrFuncArgError;
     }
@@ -187,10 +188,15 @@ CStrStatusCode cstr_split(CString* cstr, char sep, size_t* strs_len, CStringRef*
     *strs_len = 0;
     *strs = NULL;
 
+    bool is_enable = true;
     size_t old_cstr_id = 0;
 
     for (size_t cstr_id = 0; cstr_id < cstr->_cstr_sz; ++cstr_id) {
-        if (cstr->_cstr[cstr_id] == sep) {
+        if (cstr->_cstr[cstr_id] == split_enable_ch && !is_enable) {
+            is_enable = true;
+        } else if (cstr->_cstr[cstr_id] == split_disable_ch && is_enable) {
+            is_enable = false;
+        } else if (cstr->_cstr[cstr_id] == sep && is_enable) {
             if (cstr_id != old_cstr_id) {
                 *strs_len += 1;
             }
@@ -215,10 +221,15 @@ CStrStatusCode cstr_split(CString* cstr, char sep, size_t* strs_len, CStringRef*
     }
 #endif
 
+    is_enable = true;
     old_cstr_id = 0;
 
     for (size_t cstr_id = 0, strs_id = 0; cstr_id < cstr->_cstr_sz; ++cstr_id) {
-        if (cstr->_cstr[cstr_id] == sep) {
+        if (cstr->_cstr[cstr_id] == split_enable_ch && !is_enable) {
+            is_enable = true;
+        } else if (cstr->_cstr[cstr_id] == split_disable_ch && is_enable) {
+            is_enable = false;
+        } else if (cstr->_cstr[cstr_id] == sep && is_enable) {
             if (cstr_id != old_cstr_id) {
                 strs[0][strs_id]._cstr_ref_len = cstr_id - old_cstr_id;
                 strs[0][strs_id]._cstr_ref = &cstr->_cstr[old_cstr_id];
@@ -237,7 +248,7 @@ CStrStatusCode cstr_split(CString* cstr, char sep, size_t* strs_len, CStringRef*
     return CStrSuccess;
 }
 
-CStrStatusCode cstr_split_nocheck(CString* cstr, char sep, size_t* strs_len, CStringRef** strs) {
+CStrStatusCode cstr_split_nocheck(CString* cstr, char sep, char split_enable_ch, char split_disable_ch, size_t* strs_len, CStringRef** strs) {
     if (cstr->_cstr_sz == 0) {
         return CStrZeroSizeError;
     }
@@ -245,10 +256,15 @@ CStrStatusCode cstr_split_nocheck(CString* cstr, char sep, size_t* strs_len, CSt
     *strs_len = 0;
     *strs = NULL;
 
+    bool is_enable = true;
     size_t old_cstr_id = 0;
 
     for (size_t cstr_id = 0; cstr_id < cstr->_cstr_sz; ++cstr_id) {
-        if (cstr->_cstr[cstr_id] == sep) {
+        if (cstr->_cstr[cstr_id] == split_enable_ch && !is_enable) {
+            is_enable = true;
+        } else if (cstr->_cstr[cstr_id] == split_disable_ch && is_enable) {
+            is_enable = false;
+        } else if (cstr->_cstr[cstr_id] == sep && is_enable) {
             if (cstr_id != old_cstr_id) {
                 *strs_len += 1;
             }
@@ -273,10 +289,15 @@ CStrStatusCode cstr_split_nocheck(CString* cstr, char sep, size_t* strs_len, CSt
     }
 #endif
 
+    is_enable = true;
     old_cstr_id = 0;
 
     for (size_t cstr_id = 0, strs_id = 0; cstr_id < cstr->_cstr_sz; ++cstr_id) {
-        if (cstr->_cstr[cstr_id] == sep) {
+        if (cstr->_cstr[cstr_id] == split_enable_ch && !is_enable) {
+            is_enable = true;
+        } else if (cstr->_cstr[cstr_id] == split_disable_ch && is_enable) {
+            is_enable = false;
+        } else if (cstr->_cstr[cstr_id] == sep && is_enable) {
             if (cstr_id != old_cstr_id) {
                 strs[0][strs_id]._cstr_ref_len = cstr_id - old_cstr_id;
                 strs[0][strs_id]._cstr_ref = &cstr->_cstr[old_cstr_id];

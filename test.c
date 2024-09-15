@@ -3,6 +3,8 @@
 //
 
 #include <stdio.h>
+#include <wchar.h>
+#include <locale.h>
 #include <string.h>
 
 #include "cstr.h"
@@ -11,13 +13,14 @@ int main(int argc, char* argv[]) {
 
     CString* cstr;
 
-    cstr_new(sizeof("073") - 1, "073", &cstr);
+    cstr_new(sizeof(" a '  ' loop pool") - 1, " a '  ' loop pool", &cstr);
 
-    size_t cast_size = 0;
+    size_t split_len = 0;
+    CStringRef* split_strs = NULL;
 
-    cstr_cast_to_size(cstr, &cast_size, 8);
+    cstr_split_nocheck(cstr, ' ', '\'', '\'', &split_len, &split_strs);
 
-    fprintf(stdout, "cast value = %zu\n", cast_size);
+    cstr_ref_fprint_nocheck(stdout, split_strs, split_len);
 
     return 0;
 }

@@ -8,7 +8,7 @@
 #include "cstr.def.h"
 #include "cstr.err.h"
 
-extern CStrStatusCode cstr_split(CString* cstr, char sep, size_t* strs_len, CStringRef** strs);
+extern CStrStatusCode cstr_split(CString* cstr, char sep, char split_enable_ch, char split_disable_ch, size_t* strs_len, CStringRef** strs);
 
 extern CStrOpStatusCode cstr_find_str(CString* cstr, const char* str, size_t str_len, CStringRef* found_str);
 
@@ -21,7 +21,7 @@ extern CStrOpStatusCode cstr_ref_cmp_str(CStringRef* cstr_ref, const char* str, 
 // nocheck version
 
 FUNC_ASSERT(CSTR != NULL, STRS_LEN != NULL, STRS != NULL)
-extern CStrStatusCode cstr_split_nocheck(CString* cstr, char sep, size_t* strs_len, CStringRef** strs);
+extern CStrStatusCode cstr_split_nocheck(CString* cstr, char sep, char split_enable_ch, char split_disable_ch, size_t* strs_len, CStringRef** strs);
 
 FUNC_ASSERT(CSTR != NULL, STR != NULL, STR_LEN != 0, FOUND_STR != NULL)
 extern CStrOpStatusCode cstr_find_str_nocheck(CString* cstr, const char* str, size_t str_len, CStringRef* found_str);
