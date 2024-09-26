@@ -330,6 +330,70 @@ CStrStatusCode cstr_ref_fprint_nocheck(FILE* f, CStringRef* cstr_ref, size_t cst
     return CStrSuccess;
 }
 
+CStrStatusCode cstr_ref2raw(CStringRef* cstr_ref, char** raw_str) {
+    if (cstr_ref == NULL || raw_str == NULL) {
+        return CStrFuncArgError;
+    }
+
+    *raw_str = calloc(cstr_ref->_cstr_ref_len + 1, sizeof(char));
+
+#ifdef __MEM_SENSITIVE__
+    if (*raw_str == NULL) {
+        return CStrMemError;
+    }
+#endif
+
+    memcpy(*raw_str, cstr_ref->_cstr_ref, cstr_ref->_cstr_ref_len);
+
+    return CStrSuccess;
+}
+
+CStrStatusCode cstr_ref2raw_nocheck(CStringRef* cstr_ref, char** raw_str) {
+    *raw_str = calloc(cstr_ref->_cstr_ref_len + 1, sizeof(char));
+
+#ifdef __MEM_SENSITIVE__
+    if (*raw_str == NULL) {
+        return CStrMemError;
+    }
+#endif
+
+    memcpy(*raw_str, cstr_ref->_cstr_ref, cstr_ref->_cstr_ref_len);
+
+    return CStrSuccess;
+}
+
+CStrStatusCode cstr_str2raw(CString* cstr, char** raw_str) {
+    if (cstr == NULL || raw_str == NULL) {
+        return CStrFuncArgError;
+    }
+
+    *raw_str = calloc(cstr->_cstr_sz + 1, sizeof(char));
+
+#ifdef __MEM_SENSITIVE__
+    if (*raw_str == NULL) {
+        return CStrMemError;
+    }
+#endif
+
+    memcpy(*raw_str, cstr->_cstr, cstr->_cstr_sz);
+
+    return CStrSuccess;
+}
+
+CStrStatusCode cstr_str2raw_nocheck(CString* cstr, char** raw_str) {
+    *raw_str = calloc(cstr->_cstr_sz + 1, sizeof(char));
+
+#ifdef __MEM_SENSITIVE__
+    if (*raw_str == NULL) {
+        return CStrMemError;
+    }
+#endif
+
+    memcpy(*raw_str, cstr->_cstr, cstr->_cstr_sz);
+
+    return CStrSuccess;
+}
+
 CStrStatusCode cstr_clean(CString* cstr) {
     if (cstr == NULL) {
         return CStrFuncArgError;

@@ -25,6 +25,10 @@ extern CStrStatusCode cstr_fprint(FILE* f, CString* cstr);
 
 extern CStrStatusCode cstr_ref_fprint(FILE* f, CStringRef* cstr_ref, size_t cstr_ref_len);
 
+extern CStrStatusCode cstr_ref2raw(CStringRef* cstr_ref, char** raw_str);
+
+extern CStrStatusCode cstr_str2raw(CString* cstr, char** raw_str);
+
 extern CStrStatusCode cstr_clean(CString* cstr);
 
 extern CStrStatusCode cstr_free(CString** cstr);
@@ -73,6 +77,12 @@ extern CStrStatusCode cstr_fprint_nocheck(FILE* f, CString* cstr);
 
 FUNC_ASSERT(F != NULL, CSTR_REF != NULL)
 extern CStrStatusCode cstr_ref_fprint_nocheck(FILE* f, CStringRef* cstr_ref, size_t cstr_ref_len);
+
+FUNC_ASSERT(CSTR_REF != NULL, RAW_STR != NULL)
+extern CStrStatusCode cstr_ref2raw(CStringRef* cstr_ref, char** raw_str);
+
+FUNC_ASSERT(CSTR != NULL, RAW_STR != NULL)
+extern CStrStatusCode cstr_str2raw(CString* cstr, char** raw_str);
 
 FUNC_ASSERT(CSTR != NULL)
 extern CStrStatusCode cstr_clean_nocheck(CString* cstr);
