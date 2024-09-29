@@ -8,6 +8,8 @@
 #include "cstr.def.h"
 #include "cstr.err.h"
 
+#define FUNC_ASSERT(...)
+
 extern CStrStatusCode cstr_split(CString* cstr, char sep, char split_enable_ch, char split_disable_ch, size_t* strs_len, CStringRef** strs);
 
 extern CStrOpStatusCode cstr_find_str(CString* cstr, const char* str, size_t str_len, CStringRef* found_str);
@@ -35,4 +37,5 @@ extern CStrOpStatusCode cstr_cmp_str_nocheck(CString* cstr, const char* str, siz
 FUNC_ASSERT(CSTR_REF != NULL, STR != NULL, STR_LEN != 0, CMP_RES != NULL)
 extern CStrOpStatusCode cstr_ref_cmp_str_nocheck(CStringRef* cstr_ref, const char* str, size_t str_len, int* cmp_res);
 
+#undef FUNC_ASSERT
 #endif //CSTR_STROP_H

@@ -9,6 +9,8 @@
 #include "cstr.def.h"
 #include "cstr.err.h"
 
+#define FUNC_ASSERT(...)
+
 extern CStrCastStatusCode cstr_cast_to_ssize(CString* cstr, ssize_t* ssize, int scale);
 
 extern CStrCastStatusCode cstr_ref_cast_to_ssize(CStringRef* cstr_ref, ssize_t* ssize, int scale);
@@ -45,4 +47,5 @@ FUNC_ASSERT(CSTR_REF != NULL, I64 != NULL)
 extern CStrCastStatusCode cstr_cast_to_i64_nocheck(CString* cstr, int64_t* i64, int scale);
 #endif
 
+#undef FUNC_ASSERT
 #endif //CSTR_CAST_H

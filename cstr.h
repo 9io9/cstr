@@ -7,6 +7,8 @@
 #include "cstr.strop.h"
 #include "cstr.cast.h"
 
+#define FUNC_ASSERT(...)
+
 extern CStrStatusCode cstr_new(size_t str_len, char str[], CString** cstr);
 
 extern CStrStatusCode cstr_expand_length(size_t cstr_len, CString* cstr);
